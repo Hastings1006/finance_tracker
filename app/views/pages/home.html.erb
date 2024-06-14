@@ -1,2 +1,7 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="card">
+  <h2>Accounts</h2>
+  <div class="card">
+      <h3>Total</h3>
+      <p><%= @accounts.sum(:balance) %></p>
+  </div>
+</div>
