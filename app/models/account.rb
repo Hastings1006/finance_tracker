@@ -3,4 +3,6 @@ class Account < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :incomes, dependent: :destroy
   has_many :expenses, dependent: :destroy
+
+
 end
