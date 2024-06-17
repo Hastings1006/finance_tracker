@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 # config/routes.rb
-  resources :accounts, only: [:show] do
-    get 'total_balance', on: :collection
-  end
+  resources :accounts, only: [:show] 
+
+
 
 
 end
