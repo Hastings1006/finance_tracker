@@ -1,0 +1,11 @@
+<div class="card">
+<h2>Accounts</h2>
+    <h3>Total</h3>
+    <p>Total Balance: <%= @total_balance %><p>
+    <% @accounts.each do |account| %>
+      <div class="card">
+        <h3> <%= account.name %></h3>
+        <p>Balance: <%= account.balance%></p>
+      </div>
+    <%end%>
+</div>

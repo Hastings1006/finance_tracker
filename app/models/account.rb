@@ -4,9 +4,5 @@ class Account < ApplicationRecord
   has_many :incomes, dependent: :destroy
   has_many :expenses, dependent: :destroy
 
-    private
 
-  def set_default_balance
-    self.balance ||= 0
-  end
 end
