@@ -1,11 +1,29 @@
 class AccountsController < ApplicationController
-  before_action :set_account_by_user, only: [:show]
+  before_action :set_account_by_user, only: [:index, :show]
 
-  def show
+  def index
     @total_balance = @accounts.sum(:balance)
   end
 
+  def show
+    @account = @accounts.find(params[:id])
 
+  end
+
+  def edit
+    @account = @accounts.find(params[:id])
+
+  end
+
+  def update
+    @account = @accounts.find(params[:id])
+    if @account.update(account_params)
+      redirect_to account_path(@account), notice: 'Account was successfully updated.'
+    else
+      render :edit
+    end
+
+  end
 
   private
 

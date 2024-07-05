@@ -1,12 +1,4 @@
-<div class="card">
-<h2>Accounts</h2>
-    <h3>Total</h3>
-
-    <p>Total Balance: <%= @total_balance %><p>
-    <% @accounts.each do |account| %>
-      <div class="card">
-        <h3> <%= account.name %></h3>
-        <p>Balance: <%= account.balance%></p>
-      </div>
-    <%end%>
-</div>
+<h1><%=@account.name%></h1>
+<h3>Balance: £<%=@account.balance%></h3>
+<%= render "shared/account_edit_form", account: @account %>
+<%# <%=link_to "+ Add money", account_path(@account)%> 
