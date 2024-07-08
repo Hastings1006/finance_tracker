@@ -1,0 +1,11 @@
+.account-card {
+  background-color: blueviolet;
+  color: white;
+  border: 1px solid black;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  p {
+    font-size: 1.5em;
+  }
+}

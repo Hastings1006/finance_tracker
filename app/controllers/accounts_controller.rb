@@ -22,8 +22,9 @@ class AccountsController < ApplicationController
     else
       render :edit
     end
-
   end
+
+
 
   private
 
