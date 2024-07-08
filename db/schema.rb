@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_08_133320) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_08_133720) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,9 +47,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_133320) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "catagory_id", null: false
+    t.bigint "category_id", null: false
     t.index ["account_id"], name: "index_incomes_on_account_id"
-    t.index ["catagory_id"], name: "index_incomes_on_catagory_id"
+    t.index ["category_id"], name: "index_incomes_on_category_id"
     t.index ["user_id"], name: "index_incomes_on_user_id"
   end
 
@@ -59,9 +59,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_133320) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "catagory_id", null: false
+    t.bigint "category_id", null: false
     t.index ["account_id"], name: "index_transactions_on_account_id"
-    t.index ["catagory_id"], name: "index_transactions_on_catagory_id"
+    t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -82,9 +82,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_133320) do
   add_foreign_key "expenses", "categories"
   add_foreign_key "expenses", "users"
   add_foreign_key "incomes", "accounts"
-  add_foreign_key "incomes", "categories", column: "catagory_id"
+  add_foreign_key "incomes", "categories"
   add_foreign_key "incomes", "users"
   add_foreign_key "transactions", "accounts"
-  add_foreign_key "transactions", "categories", column: "catagory_id"
+  add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "users"
 end
