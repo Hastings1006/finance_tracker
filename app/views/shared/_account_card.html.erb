@@ -1,0 +1,6 @@
+<% @accounts.each do |account| %>
+  <div class="account-card">
+    <h3> <%= link_to account.name, account_path(account) %></h3>
+    <p>£<%= account.balance%></p>
+  </div>
+<% end %>
