@@ -6,4 +6,11 @@
   </div>
 
   <%= render "shared/account_card" %>
+   <% if @expenses_by_category.any? %>
+    <%= pie_chart @expenses_by_category, library: { title: 'Expenses by Category' } %>
+  <% else %>
+    <p>No expenses found.</p>
+  <% end %>
+
+
 </div>
