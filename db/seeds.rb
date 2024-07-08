@@ -9,7 +9,7 @@
 #   end
 puts "Cleaning database..."
 Account.destroy_all
-# Catagory.destroy_all
+# category.destroy_all
 Expense.destroy_all
 Income.destroy_all
 Transaction.destroy_all
@@ -36,27 +36,12 @@ puts "Finished creating accounts"
 puts "---------------------------------"
 
 puts "Creating categories..."
+category_names = ["Groceries", "Rent", "Utilities", "Transportation", "Entertainment", "Health", "Insurance"]
+categories = {}
 
-category = Catagory.new(name: "Groceries")
-category.save
-
-category = Catagory.new(name: "Rent")
-category.save
-
-category = Catagory.new(name: "Utilities")
-category.save
-
-category = Catagory.new(name: "Transportation")
-category.save
-
-category = Catagory.new(name: "Entertainment")
-category.save
-
-category = Catagory.new(name: "Health")
-category.save
-
-category = Catagory.new(name: "Insurance")
-category.save
+category_names.each do |name|
+  categories[name] = Category.create(name: name)
+end
 
 puts "Finished creating categories"
 
@@ -64,23 +49,11 @@ puts "---------------------------------"
 
 puts "Creating expenses..."
 
-expense = Expense.new(amount: 100, account: Account.first, user: User.first, catagory: Catagory.first)
-expense.save
+expense = [rand(100..5000) * 20]
+expense.each do |amount|
+  Expense.create(amount: amount, name: "food", account: Account.first, user: User.first, category: categories.values.sample)
+end
 
-expense = Expense.new(amount: 200, account: Account.first, user: User.first, catagory: Catagory.second)
-expense.save
-
-expense = Expense.new(amount: 300, account: Account.first, user: User.first, catagory: Catagory.third)
-expense.save
-
-expense = Expense.new(amount: 400, account: Account.first, user: User.first, catagory: Catagory.fourth)
-expense.save
-
-expense = Expense.new(amount: 500, account: Account.first, user: User.first, catagory: Catagory.fifth)
-expense.save
-
-expense = Expense.new(amount: 600, account: Account.first, user: User.first, catagory: Catagory.last)
-expense.save
 
 puts "Finished creating expenses"
 
@@ -88,11 +61,15 @@ puts "---------------------------------"
 
 puts "Creating incomes..."
 
-income = Income.new(amount: 1000, account: Account.first, user: User.first, catagory: Catagory.first)
-income.save
 
-income = Income.new(amount: 2000, account: Account.first, user: User.first, catagory: Catagory.second)
-income.save
+income_types = ["salary", "bonus", "investment", "other"]
+10.times do
+  income_types.each do |income_type|
+    Income.create(amount: rand(100..5000), name: income_type, account: Account.first, user: User.first, category: categories.values.sample)
+  end
+end
+
+
 
 puts "Finished creating incomes"
 
@@ -100,24 +77,18 @@ puts "---------------------------------"
 
 puts "Creating transactions..."
 
-transaction = Transaction.new(amount: 100, account: Account.first, user: User.first, catagory: Catagory.first)
-transaction.save
-
-transaction = Transaction.new(amount: 200, account: Account.first, user: User.first, catagory: Catagory.second)
-transaction.save
-
-transaction = Transaction.new(amount: 300, account: Account.first, user: User.first, catagory: Catagory.third)
-transaction.save
-
-transaction = Transaction.new(amount: 400, account: Account.first, user: User.first, catagory: Catagory.fourth)
-transaction.save
-
-transaction = Transaction.new(amount: 500, account: Account.first, user: User.first, catagory: Catagory.fifth)
-transaction.save
-
-transaction = Transaction.new(amount: 600, account: Account.first, user: User.first, catagory: Catagory.last)
-transaction.save
-
+transaction_types = ["deposit", "withdrawal"]
+20.times do
+  transaction_types.each do |transaction_type|
+    Transaction.create(
+      amount: rand(100..5000),
+      name: transaction_type,
+      account: Account.first,
+      user: User.first,
+      category: categories.values.sample
+    )
+  end
+end
 puts "Finished creating transactions"
 
 puts "---------------------------------"
