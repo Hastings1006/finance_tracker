@@ -24,8 +24,7 @@ class AccountsController < ApplicationController
     end
   end
 
-
-
+  
   private
 
   def set_account_by_user

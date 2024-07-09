@@ -27,6 +27,8 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'chartkick'
+
+gem 'httparty'
 # Devise
 # gem "devise"
 # Use Redis adapter to run Action Cable in production
