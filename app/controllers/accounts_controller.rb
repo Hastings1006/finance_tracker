@@ -24,7 +24,20 @@ class AccountsController < ApplicationController
     end
   end
 
-  
+  def new
+    @account = Account.new
+  end
+
+  def create
+    @account = Account.new(account_params)
+    @account.user_id = current_user.id
+    if @account.save
+      redirect_to account_path(@account), notice: 'Account was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_account_by_user
