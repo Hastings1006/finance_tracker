@@ -3,6 +3,13 @@ class BudgetsController < ApplicationController
 
   def show
     @budget = Budget.find_by(user: current_user)
+    if @budget
+      @incomes = @budget.user.incomes
+    end
+    @avg_income = @incomes.average(:amount)
+    @expenses = @budget.user.expenses
+    @avg_expense = @expenses.average(:amount)
+    @net_income = @avg_income - @avg_expense
   end
 
   def new
@@ -20,6 +27,9 @@ class BudgetsController < ApplicationController
     end
   end
 
+  def monthly_saving_goal
+    @goal = @avg_income * 20 / 100
+  end
 
   private
 
