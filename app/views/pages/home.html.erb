@@ -11,9 +11,16 @@
   <% else %>
     <p>No expenses found.</p>
   <% end %>
+
   <div class="budget_card">
-    <h3> <%= link_to "Budgets", budgets_path %></h3>
-    <p>£<%= @budgets%></p>
+    <% if @budgets.any? %>
+      <% @budgets.each do |x| %>
+        <h3> <%= link_to "Budgets", budgets_path %></h3>
+        <p>£<%= x.ammount %></p>
+      <% end %>
+    <% else %>
+      <h3> <%= link_to "Budgets", new_budget_path %></h3>
+    <% end %>
   </div>
 
 </div>

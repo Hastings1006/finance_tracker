@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 # config/routes.rb
   resources :accounts, only: [:index, :show, :edit, :update, :new, :create]
-
+  resources :budgets, only: [:show, :edit, :update, :new, :create]
 
 
 
