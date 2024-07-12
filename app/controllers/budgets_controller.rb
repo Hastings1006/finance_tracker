@@ -2,14 +2,12 @@ class BudgetsController < ApplicationController
  before_action :set_budget, only: [:show]
 
   def show
-    @budget = Budget.find_by(user: current_user)
-    if @budget
-      @incomes = @budget.user.incomes
-    end
-    @avg_income = @incomes.average(:amount)
-    @expenses = @budget.user.expenses
-    @avg_expense = @expenses.average(:amount)
-    @net_income = @avg_income - @avg_expense
+      @incomes = @budget.try(:user).try(:incomes)
+      @avg_income = avg(@incomes)
+      @expenses = @budget.try(:user).try(:expenses)
+      @avg_expense = avg(@expenses)
+      @net_income = @avg_income - @avg_expense if @avg_income && @avg_expense
+      @goal = @avg_income * 0.2 if @avg_income
   end
 
   def new
@@ -18,7 +16,7 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = Budget.new(budget_params)
-    @budget.user_id = current_user.id
+    @budget.user = current_user
 
     if @budget.save
       redirect_to root_path, notice: 'Budget was successfully created.'
@@ -27,17 +25,17 @@ class BudgetsController < ApplicationController
     end
   end
 
-  def monthly_saving_goal
-    @goal = @avg_income * 20 / 100
-  end
-
   private
 
   def set_budget
-    @budget = Budget.where(user_id: current_user.id)
+    @budget = current_user.budget
   end
 
   def budget_params
-    params.require(:budget).permit(:ammount, :name, :user_id)
+    params.require(:budget).permit(:ammount, :name)
+  end
+
+  def avg(amount)
+    amount.average(:amount)
   end
 end

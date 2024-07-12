@@ -7,5 +7,5 @@ class User < ApplicationRecord
           has_many :transactions, dependent: :destroy
           has_many :incomes, dependent: :destroy
           has_many :expenses, dependent: :destroy
-          has_many :budgets, dependent: :destroy
+          has_one :budget, dependent: :destroy
 end
