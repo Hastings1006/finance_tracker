@@ -1,0 +1,16 @@
+.budg-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.account-cards {
+  display: flex;
+  justify-content:flex-start;
+  flex-wrap: wrap;
+}
+.account {
+  background-color: violet;
+  border: 1px solid black;
+  margin: 0.5em;
+  padding: 0.5em;
+}
