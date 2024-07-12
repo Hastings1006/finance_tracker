@@ -1,0 +1,12 @@
+<h1>Budget</h1>
+<% if @budget %>
+  <p><%= @budget.name %></p>
+  <p><%= @budget.ammount %></p>
+<%end%>
+<p>Your avg income is <%=@avg_income%></p>
+<p>Your avg expenses are <%=@avg_expense%></p>
+<p> money after avg expenses is <%=@net_income%></p>
+<% if @net_income < 0 %>
+  <p> You are spending more than you are earning</p>
+<%end%>
+<h3>You montly saving goal is <%=@goal%></h3>

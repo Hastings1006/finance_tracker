@@ -49,7 +49,7 @@ puts "---------------------------------"
 
 puts "Creating expenses..."
 
-expense = [rand(100..5000) * 20]
+expense = [rand(100..500) * 20]
 expense.each do |amount|
   Expense.create(amount: amount, name: "food", account: Account.first, user: User.first, category: categories.values.sample)
 end
@@ -63,7 +63,7 @@ puts "Creating incomes..."
 
 
 income_types = ["salary", "bonus", "investment", "other"]
-10.times do
+20.times do
   income_types.each do |income_type|
     Income.create(amount: rand(100..5000), name: income_type, account: Account.first, user: User.first, category: categories.values.sample)
   end
@@ -81,7 +81,7 @@ transaction_types = ["deposit", "withdrawal"]
 20.times do
   transaction_types.each do |transaction_type|
     Transaction.create(
-      amount: rand(100..5000),
+      amount: rand(100..500),
       name: transaction_type,
       account: Account.first,
       user: User.first,
