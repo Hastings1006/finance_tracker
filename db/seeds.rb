@@ -89,6 +89,8 @@ transaction_types = ["deposit", "withdrawal"]
     )
   end
 end
+
+
 puts "Finished creating transactions"
 
 puts "---------------------------------"

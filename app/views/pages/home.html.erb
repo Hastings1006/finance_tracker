@@ -11,6 +11,9 @@
   <% else %>
     <p>No expenses found.</p>
   <% end %>
-
+  <div class="budget_card">
+    <h3> <%= link_to "Budgets", budgets_path %></h3>
+    <p>£<%= @budgets%></p>
+  </div>
 
 </div>
