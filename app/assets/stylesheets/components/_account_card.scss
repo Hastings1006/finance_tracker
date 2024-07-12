@@ -4,8 +4,17 @@
   border: 1px solid black;
   padding: 1em;
   display: flex;
+  /* margin: 0.5em ; */
   justify-content: space-between;
+
+  box-sizing: border-box;
   p {
     font-size: 1.5em;
   }
+  h3 {
+    margin-bottom: 5px;
+  }
+}
+.account-card:nth-child(2) {
+  margin: 0.5em 0;
 }

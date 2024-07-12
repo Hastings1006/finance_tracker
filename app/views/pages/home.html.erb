@@ -1,16 +1,28 @@
 <div class="card">
   <h2>Overview</h2>
-  <div class="account-card">
-    <h3> <%= link_to "Total", accounts_path %></h3>
-    <p>£<%= @total%></p>
+  <div class="overview">
+
+    <div class="account-section">
+      <div class="account-card">
+        <h3> <%= link_to "Total", accounts_path %></h3>
+        <p>£<%= @total%></p>
+      </div>
+      <%= render "shared/account_card" %>
+    </div>
+   <%# <% if @expenses_by_category.any? %>
+    <%# <%= pie_chart @expenses_by_category, library: { title: 'Expenses by Category' } %>
+    <%# <% else %>
+    <%# <p>No expenses found.</p> %>
+   <%# <% end %>
+    <div class="budget-section">
+      <% if @budgets.any? %>
+        <% @budgets.each do |x| %>
+          <h3> <%= link_to "Budgets", budgets_path %></h3>
+          <p>£<%= x.ammount %></p>
+        <% end %>
+      <% else %>
+        <h3> <%= link_to "Budgets", new_budget_path %></h3>
+      <% end %>
+    </div>
   </div>
-
-  <%= render "shared/account_card" %>
-   <% if @expenses_by_category.any? %>
-    <%= pie_chart @expenses_by_category, library: { title: 'Expenses by Category' } %>
-  <% else %>
-    <p>No expenses found.</p>
-  <% end %>
-
-
 </div>
