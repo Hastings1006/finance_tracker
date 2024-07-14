@@ -2,12 +2,20 @@ class BudgetsController < ApplicationController
  before_action :set_budget, only: [:show]
 
   def show
-      @incomes = @budget.try(:user).try(:incomes)
-      @avg_income = avg(@incomes)
-      @expenses = @budget.try(:user).try(:expenses)
-      @avg_expense = avg(@expenses)
-      @net_income = @avg_income - @avg_expense if @avg_income && @avg_expense
-      @goal = @avg_income * 0.2 if @avg_income
+    transactions = @budget.user.transactions
+      # Calculate incomes (deposits)
+    @incomes = transactions.where(transaction_type: 'deposit')
+    @avg_income = avg(@incomes)
+
+    # Calculate expenses (withdrawals)
+    @expenses = transactions.where(transaction_type: 'withdrawal')
+    @avg_expense = avg(@expenses)
+
+    # Calculate net income and goal (assuming avg_income is available)
+    if @avg_income && @avg_expense
+      @net_income = @avg_income - @avg_expense
+      @goal = @avg_income * 0.2
+    end
   end
 
   def new
@@ -35,7 +43,10 @@ class BudgetsController < ApplicationController
     params.require(:budget).permit(:ammount, :name)
   end
 
-  def avg(amount)
-    amount.average(:amount)
+  def avg(transactions)
+    return 0 if transactions.empty?
+
+    total_amount = transactions.sum(:amount)
+    total_amount / transactions.count
   end
 end

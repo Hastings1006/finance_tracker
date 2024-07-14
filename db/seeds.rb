@@ -7,11 +7,20 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'date'
+def random_date_within_last_year
+  start_date = Date.today - 1.year
+  end_date = Date.today
+  rand(start_date..end_date)
+end
+
+def random_time
+  Time.at(rand * Time.now.to_i)
+end
 puts "Cleaning database..."
 Account.destroy_all
 # category.destroy_all
-Expense.destroy_all
-Income.destroy_all
+
 Transaction.destroy_all
 User.destroy_all
 
@@ -47,35 +56,10 @@ puts "Finished creating categories"
 
 puts "---------------------------------"
 
-puts "Creating expenses..."
 
-expense = [rand(100..500) * 20]
-expense.each do |amount|
-  Expense.create(amount: amount, name: "food", account: Account.first, user: User.first, category: categories.values.sample)
-end
-
-
-puts "Finished creating expenses"
-
-puts "---------------------------------"
-
-puts "Creating incomes..."
-
-
-income_types = ["salary", "bonus", "investment", "other"]
-20.times do
-  income_types.each do |income_type|
-    Income.create(amount: rand(100..5000), name: income_type, account: Account.first, user: User.first, category: categories.values.sample)
-  end
-end
-
-
-
-puts "Finished creating incomes"
-
-puts "---------------------------------"
 
 puts "Creating transactions..."
+
 
 transaction_types = ["deposit", "withdrawal"]
 20.times do
@@ -85,7 +69,23 @@ transaction_types = ["deposit", "withdrawal"]
       name: transaction_type,
       account: Account.first,
       user: User.first,
-      category: categories.values.sample
+      category: categories.values.sample,
+      transaction_date: random_date_within_last_year,
+      transaction_time: random_time
+    )
+  end
+end
+
+20.times do
+  transaction_types.each do |transaction_type|
+    Transaction.create(
+      amount: rand(100..500),
+      name: transaction_type,
+      account: Account.second,
+      user: User.first,
+      category: categories.values.sample,
+      transaction_date: random_date_within_last_year,
+      transaction_time: random_time
     )
   end
 end
