@@ -1,3 +1,9 @@
 <h1><%=@account.name%></h1>
 <h3>Balance: £<%=@account.balance%></h3>
 <%= link_to "back", accounts_path(current_user) %>
+<h1>transactions</h1>
+<ul>
+  <% @account.transactions.each do |transaction| %>
+    <li><%=transaction.name %>: <%= transaction.amount %></li>
+  <%end%>
+</ul>
