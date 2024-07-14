@@ -10,10 +10,21 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def new
+    @transaction = Transaction.new
+  end
+
+  def create
+    @transaction = Transaction.new(transaction_params)
+  end
+
   private
 
   def set_transactions
     @transactions = Transaction.where(user_id: current_user.id)
   end
 
+  def transaction_params
+    params.require(:transaction).permit(:amount, :transaction_type, :transaction_date, :transaction_time)
+  end
 end
