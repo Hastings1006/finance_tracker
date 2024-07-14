@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_14_114231) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_14_135735) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,24 +32,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_114231) do
     t.index ["user_id"], name: "index_budgets_on_user_id"
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "transactions", force: :cascade do |t|
     t.integer "amount", default: 0, null: false
     t.bigint "account_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "category_id", null: false
     t.string "transaction_type"
     t.date "transaction_date"
-    t.time "transaction_time"
     t.index ["account_id"], name: "index_transactions_on_account_id"
-    t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -68,6 +59,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_114231) do
   add_foreign_key "accounts", "users"
   add_foreign_key "budgets", "users"
   add_foreign_key "transactions", "accounts"
-  add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "users"
 end

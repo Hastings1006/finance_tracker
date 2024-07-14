@@ -44,15 +44,15 @@ puts "Finished creating accounts"
 
 puts "---------------------------------"
 
-puts "Creating categories..."
-category_names = ["Groceries", "Rent", "Utilities", "Transportation", "Entertainment", "Health", "Insurance"]
-categories = {}
+# puts "Creating categories..."
+# category_names = ["Groceries", "Rent", "Utilities", "Transportation", "Entertainment", "Health", "Insurance"]
+# categories = {}
 
-category_names.each do |name|
-  categories[name] = Category.create(name: name)
-end
+# category_names.each do |name|
+#   categories[name] = Category.create(name: name)
+# end
 
-puts "Finished creating categories"
+# puts "Finished creating categories"
 
 puts "---------------------------------"
 
