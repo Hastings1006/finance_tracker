@@ -8,3 +8,5 @@
   <%end%>
 </ul>
 <%= link_to 'New transaction', new_transaction_path(current_user)  %>
+<%= link_to 'Edit account', edit_account_path(current_user) %>
+<%= link_to 'Delete account', account_path(@account), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
