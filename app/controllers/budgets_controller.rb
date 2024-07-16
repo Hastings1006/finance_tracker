@@ -2,13 +2,13 @@ class BudgetsController < ApplicationController
  before_action :set_budget, only: [:show]
 
   def show
-    transactions = @budget.user.transactions
+    @transactions = Transaction.joins(account: :user).where(users: { id: current_user.id })
       # Calculate incomes (deposits)
-    @incomes = transactions.where(transaction_type: 'deposit')
+    @incomes = @transactions.where(transaction_type: 'deposit')
     @avg_income = avg(@incomes)
 
     # Calculate expenses (withdrawals)
-    @expenses = transactions.where(transaction_type: 'withdrawal')
+    @expenses = @transactions.where(transaction_type: 'withdrawal')
     @avg_expense = avg(@expenses)
 
     # Calculate net income and goal (assuming avg_income is available)
@@ -36,6 +36,7 @@ class BudgetsController < ApplicationController
   private
 
   def set_budget
+
     @budget = current_user.budget
   end
 

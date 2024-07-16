@@ -69,7 +69,6 @@ transaction_types = ["deposit", "withdrawal"]
       amount: rand(100..500),
       transaction_type: transaction_type,
       account: Account.order("RANDOM()").first,
-      user: User.first,
       transaction_date: random_date_within_last_year,
     )
   end
@@ -81,7 +80,6 @@ end
       amount: rand(100..500),
       transaction_type: transaction_type,
       account: Account.order("RANDOM()").first,
-      user: User.first,
       transaction_date: random_date_within_last_year,
     )
   end
