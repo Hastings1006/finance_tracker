@@ -44,6 +44,19 @@ class AccountsController < ApplicationController
     redirect_to accounts_path, notice: 'Account was successfully destroyed.'
   end
 
+  def adjust_balance_by_transaction(transaction)
+    @account = @accounts.find_by(id: transaction.account_id)
+    unless  @account
+      raise "Account not found"
+    end
+
+    ActiveRecord::Base.transaction do
+      @account.lock!
+      @account.balance += transaction.amount
+      @account.save!
+    end
+  end
+
   private
 
   def set_account_by_user

@@ -2,6 +2,7 @@ class TransactionsController < ApplicationController
   before_action :set_transactions, only: [:index, :edit, :update, :destroy]
   # before_action :set_account, only: [:show, :create]
   # before_action :set_categories, only: [:index]
+  before_action :authenticate_user!
   def index
 
   end
@@ -24,11 +25,12 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
 
 
-    @transaction.user = current_user
+    @transaction.account.user = current_user
 
     if @transaction.save
       redirect_to root_path, notice: "Transaction was created"
     else
+      flash.now[:alert] = "error creating transaction"
       render :new, status: :unprocessable_entity
     end
   end
@@ -66,4 +68,7 @@ class TransactionsController < ApplicationController
     params.require(:transaction).permit(:amount, :transaction_type, :transaction_date, :account_id, :category_id)
   end
 
+  def adjust_balance
+    adjust_balance_by_transaction(self)
+  end
 end

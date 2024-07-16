@@ -1,5 +1,9 @@
 class BudgetsController < ApplicationController
+  before_action :authenticate_user!
  before_action :set_budget, only: [:show]
+  def index
+    @budgets = Budget.where(user_id: current_user.id)
+  end
 
   def show
     @transactions = Transaction.joins(account: :user).where(users: { id: current_user.id })
@@ -46,8 +50,6 @@ class BudgetsController < ApplicationController
 
   def avg(transactions)
     return 0 if transactions.empty?
-
-    total_amount = transactions.sum(:amount)
-    total_amount / transactions.count
+    transactions.sum(:amount) / transactions.count
   end
 end
