@@ -67,11 +67,10 @@ transaction_types = ["deposit", "withdrawal"]
   transaction_types.each do |transaction_type|
     Transaction.create(
       amount: rand(100..500),
-      name: transaction_type,
+      transaction_type: transaction_type,
       account: Account.order("RANDOM()").first,
       user: User.first,
       transaction_date: random_date_within_last_year,
-      transaction_time: random_time
     )
   end
 end
@@ -80,11 +79,10 @@ end
   transaction_types.each do |transaction_type|
     Transaction.create(
       amount: rand(100..500),
-      name: transaction_type,
+      transaction_type: transaction_type,
       account: Account.order("RANDOM()").first,
       user: User.first,
       transaction_date: random_date_within_last_year,
-      transaction_time: random_time
     )
   end
 end

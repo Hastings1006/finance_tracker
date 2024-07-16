@@ -1,0 +1,9 @@
+<%= simple_form_for @transaction do |f| %>
+
+  <%= f.input :amount, as: :integer %>
+  <%= f.input :transaction_type, collection: ['Withdrawal', 'Deposit'], label: 'Select option' %>
+  <%= f.input :transaction_date, as: :date %>
+  <%= f.input :account_id, collection: Account.all.map { |account| [account.name, account.id] }, label: 'Select option'%>
+
+  <%= f.button :submit %>
+<% end %>
