@@ -52,7 +52,7 @@ class TransactionsController < ApplicationController
   private
 
   def set_transactions
-    @transactions = Transaction.where(user_id: current_user.id)
+    @transactions = Transaction.joins(account: :user).where(users: { id: current_user.id})
   end
 
   def transaction_params
