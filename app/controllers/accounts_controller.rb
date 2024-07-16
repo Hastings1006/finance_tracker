@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account_by_user, only: [:index, :show]
+  before_action :set_account_by_user, only: [:index, :show, :edit, :update, :destroy]
 
   def index
     @total_balance = @accounts.sum(:balance)
@@ -36,6 +36,12 @@ class AccountsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @account = @accounts.find(params[:id])
+    @account.destroy
+    redirect_to accounts_path, notice: 'Account was successfully destroyed.'
   end
 
   private
