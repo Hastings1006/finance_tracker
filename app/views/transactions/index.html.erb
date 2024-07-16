@@ -2,6 +2,6 @@
 <ul>
 
   <% @transactions.each do |transaction| %>
-    <li><%=transaction.transaction_type %>: <%= transaction.amount %></li>
+    <li><%= link_to transaction.transaction_type, transaction_path(transaction) %>: <%= transaction.amount %></li>
   <%end%>
  </ul>

@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :set_transactions, only: [:index]
+  before_action :set_transactions, only: [:index, :edit, :update, :destroy]
   # before_action :set_account, only: [:show, :create]
 
   def index
@@ -28,6 +28,25 @@ class TransactionsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @transaction = Transaction.find(params[:id])
+  end
+
+  def update
+    @transaction = Transaction.find(params[:id])
+    if @transaction.update(transaction_params)
+      redirect_to transaction_path(@transaction), notice: 'Transaction was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @transaction = Transaction.find(params[:id])
+    @transaction.destroy
+    redirect_to transactions_path, notice: 'Transaction was successfully destroyed.'
   end
 
   private
