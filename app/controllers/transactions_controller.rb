@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transactions, only: [:index]
-  before_action :set_account, only: [:show, :create]
+  # before_action :set_account, only: [:show, :create]
 
   def index
   end
@@ -20,7 +20,7 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
 
-    @transaction.account = set_account
+
     @transaction.user = current_user
 
     if @transaction.save
@@ -37,10 +37,7 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:amount, :transaction_type, :transaction_date)
+    params.require(:transaction).permit(:amount, :transaction_type, :transaction_date, :account_id)
   end
 
-  def set_account
-    @account = Account.find(params[:account_id]) if params[:account_id]
-  end
 end
