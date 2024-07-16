@@ -62,26 +62,21 @@ puts "---------------------------------"
 puts "Creating transactions..."
 
 
+accounts = Account.all
+
 transaction_types = ["deposit", "withdrawal"]
-20.times do
-  transaction_types.each do |transaction_type|
-    Transaction.create(
-      amount: rand(100..500),
-      transaction_type: transaction_type,
-      account: Account.order("RANDOM()").first,
-      transaction_date: random_date_within_last_year,
-    )
-  end
-end
 
 20.times do
-  transaction_types.each do |transaction_type|
-    Transaction.create(
-      amount: rand(100..500),
-      transaction_type: transaction_type,
-      account: Account.order("RANDOM()").first,
-      transaction_date: random_date_within_last_year,
-    )
+  accounts.each do |account|
+    transaction_types.each do |transaction_type|
+      # Create the transaction
+      Transaction.create(
+        amount: rand(100..500),
+        transaction_type: transaction_type,
+        account: account,
+        transaction_date: random_date_within_last_year,
+      )
+    end
   end
 end
 
@@ -89,4 +84,22 @@ puts "Finished creating transactions"
 
 puts "---------------------------------"
 
+puts "Creating transaction categories..."
+
+categories = ["Groceries", "Rent", "Utilities", "Transportation", "Entertainment", "Health", "Insurance"]
+categories.each do |category|
+  Category.create(name: category)
+end
+
+Transaction.all.each do |transaction|
+  categories.each do |category|
+    category = Category.find_by(name: category)
+    if category.present?
+      TransactionCategory.create(
+      transaction_record: transaction,
+      category: category,
+      )
+    end
+  end
+end
 puts "Finished seeding the database!"

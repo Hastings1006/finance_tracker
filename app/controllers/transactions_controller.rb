@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
   # before_action :set_account, only: [:show, :create]
 
   def index
+
   end
 
   def show
@@ -56,7 +57,7 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:amount, :transaction_type, :transaction_date, :account_id)
+    params.require(:transaction).permit(:amount, :transaction_type, :transaction_date, :account_id, :category_id)
   end
 
 end

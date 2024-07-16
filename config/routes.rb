@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'transaction/new'
+  get 'transaction/create'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -10,12 +12,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 # config/routes.rb
-  resources :accounts, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
-    resources :songs, only: [:index, :show]
-  end
-  resources :budgets, only: [:show, :edit, :update, :new, :create]
-  resources :transactions, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :accounts, only: [:index, :show, :edit, :update, :new, :create, :destroy]
 
+  resources :budgets, only: [:show, :edit, :update, :new, :create]
+  resources :transactions, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :transaction_categories, only: [:new, :create, :destroy]
+  end
+  resources :categories, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
 
 end
