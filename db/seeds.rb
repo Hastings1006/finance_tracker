@@ -17,6 +17,7 @@ end
 def random_time
   Time.at(rand * Time.now.to_i)
 end
+
 puts "Cleaning database..."
 Account.destroy_all
 # category.destroy_all
@@ -67,9 +68,8 @@ transaction_types = ["deposit", "withdrawal"]
     Transaction.create(
       amount: rand(100..500),
       name: transaction_type,
-      account: Account.first,
+      account: Account.order("RANDOM()").first,
       user: User.first,
-      category: categories.values.sample,
       transaction_date: random_date_within_last_year,
       transaction_time: random_time
     )
@@ -81,9 +81,8 @@ end
     Transaction.create(
       amount: rand(100..500),
       name: transaction_type,
-      account: Account.second,
+      account: Account.order("RANDOM()").first,
       user: User.first,
-      category: categories.values.sample,
       transaction_date: random_date_within_last_year,
       transaction_time: random_time
     )
