@@ -1,7 +1,9 @@
-<h1>transactions</h1>
+<h1>Transactions</h1>
 <ul>
-
   <% @transactions.each do |transaction| %>
-    <li><%= link_to transaction.transaction_type, transaction_path(transaction) %>: <%= transaction.amount %></li>
-  <%end%>
- </ul>
+    <li>
+      <%= link_to transaction.transaction_type, transaction_path(transaction) %>: <%= transaction.amount %>
+      
+    </li>
+  <% end %>
+</ul>

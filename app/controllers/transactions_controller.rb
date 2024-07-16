@@ -1,15 +1,18 @@
 class TransactionsController < ApplicationController
   before_action :set_transactions, only: [:index, :edit, :update, :destroy]
   # before_action :set_account, only: [:show, :create]
-
+  # before_action :set_categories, only: [:index]
   def index
+
   end
 
   def show
     if params[:account_id]
       @transaction = @account.transactions
+
     else
       @transaction = Transaction.find(params[:id])
+
     end
   end
 
@@ -55,8 +58,12 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.joins(account: :user).where(users: { id: current_user.id})
   end
 
+  def set_categories
+    @categories = @transaction.categories
+  end
+
   def transaction_params
-    params.require(:transaction).permit(:amount, :transaction_type, :transaction_date, :account_id)
+    params.require(:transaction).permit(:amount, :transaction_type, :transaction_date, :account_id, :category_id)
   end
 
 end
