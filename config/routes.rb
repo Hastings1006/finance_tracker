@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :songs, only: [:index, :show]
   end
   resources :budgets, only: [:show, :edit, :update, :new, :create]
-  resources :transactions, only: [:index]
+  resources :transactions, only: [:index, :show, :new, :create]
 
 
 

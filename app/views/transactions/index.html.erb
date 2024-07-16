@@ -2,6 +2,6 @@
 <ul>
 
   <% @transactions.each do |transaction| %>
-    <li><%=transaction.name %>: <%= transaction.amount %></li>
+    <li><%=transaction.transaction_type %>: <%= transaction.amount %></li>
   <%end%>
  </ul>
