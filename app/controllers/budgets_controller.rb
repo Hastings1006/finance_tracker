@@ -7,7 +7,7 @@ class BudgetsController < ApplicationController
 
   def show
     # @transactions = Transaction.joins(:account).where(accounts: { user_id: current_user.id })
-        @transactions = Transaction.joins(account: :budget).where(accounts: { user_id: current_user.id })
+  @transactions = Transaction.joins(account: { user: :budget }).where(users: { id: current_user.id })
       # Calculate incomes (deposits)
     incomes = @transactions.where(transaction_type: 'deposit')
     @avg_income = incomes.average(:amount) || 0
@@ -24,12 +24,15 @@ class BudgetsController < ApplicationController
   end
 
   def new
-    @budget = Budget.new
+    unless current_user.budget.present?
+      @budget = Budget.new
+    end
   end
 
   def create
     @budget = Budget.new(budget_params)
     # @budget.user = current_user
+    @budget.user_id = current_user.id
 
     if @budget.save
       # create_budget if @budget.ammount > 0
@@ -38,6 +41,7 @@ class BudgetsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+
   end
 
   private
@@ -47,11 +51,9 @@ class BudgetsController < ApplicationController
   end
 
   def set_budget
-    @budget = current_user.budgets.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-      redirect_to root_path, alert: "Budget not found"
-
+    @budget = current_user.budget
   end
+
 
   def budget_params
     params.require(:budget).permit(:ammount, :name)

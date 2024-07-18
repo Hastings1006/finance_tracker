@@ -15,11 +15,10 @@
       <%# <p>No expenses found.</p> %>
       <%# <% end %>
       <div class="budget-section">
-        <% if @budgets.any? %>
-          <% @budgets.each do |budget| %>
-            <h3> <%= link_to "Budgets", budget_path(budget) %></h3>
-            <p>£<%= number_to_currency(budget.ammount) %></p>
-          <% end %>
+        <% if @budget %>
+            <h3> <%= link_to "Budgets", budget_path(@budget) %></h3>
+            <p>£<%= @budget.ammount %></p>
+
         <% else %>
           <h3> <%= link_to "Budgets", budget_path(current_user) %></h3>
         <% end %>

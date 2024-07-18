@@ -4,7 +4,7 @@ class PagesController < ApplicationController
     @total = @accounts.sum(:balance)
 
 
-    @budgets = Budget.where(user: current_user.id)
+    @budget = current_user.budget
 
   end
 
