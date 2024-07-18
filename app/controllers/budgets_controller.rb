@@ -29,22 +29,22 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = Budget.new(budget_params)
-    @budget.user = current_user
+    # @budget.user = current_user
 
     if @budget.save
-
+      # create_budget if @budget.ammount > 0
       redirect_to root_path, notice: 'Budget was successfully created.'
 
     else
       render :new, status: :unprocessable_entity
     end
-
   end
-
-
 
   private
 
+  def update_budget
+    @budget.update(ammount: @budget.ammount)
+  end
 
   def set_budget
     @budget = current_user.budgets.find(params[:id])

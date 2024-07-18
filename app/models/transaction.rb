@@ -6,8 +6,13 @@ class Transaction < ApplicationRecord
   validates :account, presence: true
 
   after_create :adjust_balance
+  after_commit :update_budget, on: [:create, :update, :destory]
 
   private
+
+  def update_budget
+    account.update_budget if account.present?
+    end
 
   def adjust_balance
     account.adjust_balance_by_transaction(self)

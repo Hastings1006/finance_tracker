@@ -7,4 +7,5 @@ class User < ApplicationRecord
         # has_many :transactions, dependent: :destroy, through: :accounts
 
         has_many :budgets
+        has_many :transactions, through: :accounts
 end
