@@ -1,0 +1,7 @@
+<div class="card" >
+  <%= simple_form_for @account do |f| %>
+    <%= f.input :name %>
+    <%= f.input :balance, as: :integer %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
