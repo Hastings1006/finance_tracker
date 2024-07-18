@@ -17,7 +17,7 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <% if @budgets.present?%>
+            <% if @budget.present?%>
               <%= link_to budget_path(current_user) do %>
                 <h4 class="nav-link">Budget<span class="sr-only">(current)</span></h4>
               <% end %>
