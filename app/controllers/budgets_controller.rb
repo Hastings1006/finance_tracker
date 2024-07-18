@@ -41,15 +41,16 @@ class BudgetsController < ApplicationController
 
   end
 
-  def budget_save
 
-  end
 
   private
 
+
   def set_budget
     @budget = current_user.budgets.find(params[:id])
-    # @budget = current_user.budget.sum(:ammount)
+  rescue ActiveRecord::RecordNotFound
+      redirect_to root_path, alert: "Budget not found"
+
   end
 
   def budget_params
@@ -60,4 +61,5 @@ class BudgetsController < ApplicationController
     return 0 if transactions.empty?
     transactions.sum(:amount) / transactions.count
   end
+
 end
