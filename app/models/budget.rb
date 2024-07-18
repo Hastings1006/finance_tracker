@@ -1,4 +1,5 @@
 class Budget < ApplicationRecord
   belongs_to :user
-  # has_many :transactions
+  has_many :accounts
+  has_many :transactions, through: :accounts
 end

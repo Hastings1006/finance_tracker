@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   # root "posts#index"
 # config/routes.rb
   resources :accounts, only: [:index, :show, :edit, :update, :new, :create, :destroy]
-
-  resources :budgets, only: [:index, :show, :edit, :update, :new, :create]
+  resources :budgets, only: [:index, :show, :edit, :update, :new, :create] do
+    resources :transactions, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  end
   resources :transactions, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :transaction_categories, only: [:index,:show, :new, :create, :destroy]
   end

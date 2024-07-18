@@ -6,20 +6,21 @@ class BudgetsController < ApplicationController
   end
 
   def show
-    @transactions = Transaction.joins(account: :user).where(users: { id: current_user.id })
+    # @transactions = Transaction.joins(:account).where(accounts: { user_id: current_user.id })
+        @transactions = Transaction.joins(account: :budget).where(accounts: { budget_id: @budget.ids })
       # Calculate incomes (deposits)
-    @incomes = @transactions.where(transaction_type: 'deposit')
-    @avg_income = avg(@incomes)
+    incomes = @transactions.where(transaction_type: 'deposit')
+    @avg_income = incomes.average(:amount) || 0
 
     # Calculate expenses (withdrawals)
-    @expenses = @transactions.where(transaction_type: 'withdrawal')
-    @avg_expense = avg(@expenses)
+    expenses = @transactions.where(transaction_type: 'withdrawal')
+    @avg_expense = expenses.average(:amount) || 0
 
     # Calculate net income and goal (assuming avg_income is available)
-    if @avg_income && @avg_expense
+
       @net_income = @avg_income - @avg_expense
       @goal = @avg_income * 0.2
-    end
+
   end
 
   def new
@@ -31,17 +32,24 @@ class BudgetsController < ApplicationController
     @budget.user = current_user
 
     if @budget.save
+
       redirect_to root_path, notice: 'Budget was successfully created.'
+
     else
       render :new, status: :unprocessable_entity
     end
+
+  end
+
+  def budget_save
+
   end
 
   private
 
   def set_budget
-
-    @budget = current_user.budget
+    @budget = current_user.budgets.find(params[:id])
+    # @budget = current_user.budget.sum(:ammount)
   end
 
   def budget_params

@@ -1,16 +1,17 @@
 class Account < ApplicationRecord
   belongs_to :user
+  # belongs_to :budget
   has_many :transactions, dependent: :destroy
 
-  def adjust_balance_by_transaction(transaction)
-    unless self
-      raise "Account not found"
-    end
+  after_create :adjust_balance_by_transaction
 
-    ActiveRecord::Base.transaction do
-      self.lock!
-      self.balance += transaction.amount
-      self.save!
+  private
+
+  def adjust_balance_by_transaction
+    if transaction_type == 'deposit'
+      account.update(balance:account.balance + amount)
+      elseif transaction_type == 'withdrawal'
+      account.update(balance: account.balance - amount)
     end
   end
 end
