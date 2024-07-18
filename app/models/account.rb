@@ -1,7 +1,7 @@
 class Account < ApplicationRecord
   belongs_to :user
-  # belongs_to :budget
-  has_many :transactions, dependent: :destroy
+  has_one :budget
+  has_many :transactions
 
   after_create :adjust_balance_by_transaction
 
