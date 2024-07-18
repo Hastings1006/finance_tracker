@@ -7,7 +7,7 @@ class BudgetsController < ApplicationController
 
   def show
     # @transactions = Transaction.joins(:account).where(accounts: { user_id: current_user.id })
-        @transactions = Transaction.joins(account: :budget).where(accounts: { budget_id: @budget.ids })
+        @transactions = Transaction.joins(account: :budget).where(accounts: { user_id: current_user.id })
       # Calculate incomes (deposits)
     incomes = @transactions.where(transaction_type: 'deposit')
     @avg_income = incomes.average(:amount) || 0
