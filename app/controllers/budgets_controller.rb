@@ -23,9 +23,9 @@ class BudgetsController < ApplicationController
   end
 
   def new
-    unless current_user.budget.present?
+
       @budget = Budget.new
-    end
+
   end
 
   def create
@@ -55,7 +55,7 @@ class BudgetsController < ApplicationController
 
 
   def budget_params
-    params.require(:budget).permit(:ammount, :name)
+    params.require(:budget).permit(:ammount, :name, :user_id)
   end
 
   def calculate_average(array)

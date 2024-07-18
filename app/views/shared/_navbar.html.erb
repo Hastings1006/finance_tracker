@@ -17,7 +17,7 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <% if @budget.present?%>
+            <% if current_user.budget.present?%>
               <%= link_to budget_path(current_user) do %>
                 <h4 class="nav-link">Budget<span class="sr-only">(current)</span></h4>
               <% end %>
@@ -36,5 +36,6 @@
 
       </ul>
     </div>
+          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-password log-out" %>
     <img class="avatar" alt="avatar-bordered" src="https://kitt.lewagon.com/placeholder/users/sarahlafer" />
   </nav>
