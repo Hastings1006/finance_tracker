@@ -1,6 +1,6 @@
 class BudgetsController < ApplicationController
   before_action :authenticate_user!
- before_action :set_budget, only: [:show]
+ before_action :set_budget, only: [:show, :edit]
 
 
 
@@ -40,7 +40,25 @@ class BudgetsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
 
+  def edit
+
+  end
+
+  def update
+    @budget = Budget.find(params[:id])
+    if @budget.update(budget_params)
+      redirect_to budget_path(@budget), notice: 'Budget was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @budget = Budget.find(params[:id])
+    @budget.destroy
+    redirect_to budgets_path, notice: 'Budget was successfully destroyed.'
   end
 
   private
