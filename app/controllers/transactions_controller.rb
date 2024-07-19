@@ -1,9 +1,9 @@
 class TransactionsController < ApplicationController
   before_action :set_transactions, only: [:index, :edit, :update, :destroy]
-  before_action :load_categories, only: [:new, :edit]
+  before_action :load_categories, only: [:index, :new, :edit]
   before_action :authenticate_user!
   def index
-
+        @transactions_by_category = Transaction.includes(:category).group_by(&:category)
   end
 
   def show

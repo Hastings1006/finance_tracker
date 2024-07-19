@@ -1,10 +1,21 @@
 <h1>Transactions</h1>
 <%= link_to 'add', new_transaction_path %>
-<ul>
-  <% @transactions.each do |transaction| %>
-    <li>
-      <%= link_to transaction.transaction_type, transaction_path(transaction) %>: <%= transaction.amount %>
-      <%# <%= transaction.transaction_record.category.name %>
-    </li>
-  <% end %>
-</ul>
+<% @transactions_by_category.each do |category, transactions| %>
+  <h2><%= category.name %></h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% transactions.each do |transaction| %>
+        <tr>
+          <td><%= transaction.transaction_type%>
+          <td><%= number_to_currency(transaction.amount) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
