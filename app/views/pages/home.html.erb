@@ -23,6 +23,13 @@
           <h3> <%= link_to "Budgets", budget_path(current_user) %></h3>
         <% end %>
       </div>
+      <div class="pot-section">
+        <% if @pots %>
+          <h3> <%= link_to "Pots", pots_path %></h3>
+        <%else%>
+          <h3> <%= link_to "create a pot", new_pot_path %></h3>
+        <%end%>
+      </div>
     <% else %>
       <%= link_to 'Add account', new_account_path(current_user)%>
     <% end %>
