@@ -1,4 +1,5 @@
 class PotsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user_pots, only: [:index]
   before_action :set_user_pot, only: [:show, :edit, :update, :destroy]
   before_action :set_new_pot, only: [:new, :create]
@@ -13,7 +14,7 @@ class PotsController < ApplicationController
   end
 
   def create
-    @pot = current_user.pots.new(pot_params)
+    @pot = current_user.pots.build(pot_params)
     if @pot.save
       redirect_to pots_path, notice: 'Pot was successfully created.'
     else

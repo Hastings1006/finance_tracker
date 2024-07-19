@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_account_by_user, only: [:index, :show, :edit, :update, :destroy]
 
   def index
