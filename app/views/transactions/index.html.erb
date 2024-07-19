@@ -1,21 +1,27 @@
 <h1>Transactions</h1>
+<div data-controller="refresh-list">
+  <%= form_with url: transactions_path, method: :get, html: { class: "mb-5", data: { refresh_list_target: "form", action: 'input->refresh-list#search' } } do |f| %>
+    <%= f.text_field :query,
+                     class: 'form-control',
+                     placeholder: 'find a transaction',
+                     value: params[:query],
+                     data: { refresh_list_target: 'searchInput' } %>
+  <% end %>
+  <div data-refresh-list-target='list'>
+    <%= render partial: 'transactions_list', locals: { transactions_by_category: @transactions_by_category } %>
+  </div>
+</div>
+
+
+</div>
+
 <%= link_to 'add', new_transaction_path %>
 <% @transactions_by_category.each do |category, transactions| %>
   <h2><%= category.name %></h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
       <% transactions.each do |transaction| %>
-        <tr>
-          <td><%= transaction.transaction_type%>
-          <td><%= number_to_currency(transaction.amount) %></td>
-        </tr>
+
+          <h3><%= transaction.transaction_type%></h3>
+          <p><%= number_to_currency(transaction.amount) %></p>
+          <p><%= transaction.transaction_date%></p>
       <% end %>
-    </tbody>
-  </table>
 <% end %>
