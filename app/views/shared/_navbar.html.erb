@@ -32,6 +32,16 @@
               <h4 class="nav-link">Transactions<span class="sr-only">(current)</span></h4>
             <%end%>
           </li>
+          <li class="nav-item">
+            <% if current_user.pots.present?%>
+              <%= link_to pots_path do %>
+                <h4 class="nav-link">Pots<span class="sr-only">(current)</span></h4>
+              <%end%>
+            <% else %>
+              <%= link_to new_pot_path do %>
+                <h4 class="nav-link">Pots<span class="sr-only">(current)</span></h4>
+              <%end%>
+            <%end%>
         <%end%>
 
       </ul>
