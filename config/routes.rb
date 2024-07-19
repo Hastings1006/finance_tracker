@@ -15,10 +15,8 @@ Rails.application.routes.draw do
   resources :accounts
   resources :budgets
 
-  resources :transactions, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :transaction_categories, only: [:index,:show, :new, :create, :destroy]
-  end
+  resources :transactions
   resources :categories
-  resources :transaction_categories
+
   resources :pots
 end

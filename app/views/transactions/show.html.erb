@@ -1,9 +1,9 @@
 <h1><%=@transaction.transaction_type%></h1>
 <%=@transaction.amount%>
 <ul>
-  <% @transaction.transaction_categories.each do |transaction_category| %>
-    <li><%= transaction_category.category.name %></li>
-  <% end %>
+
+    <li><%= @transaction.category.name %></li>
+
 </ul>
 <%= link_to 'edit transaction', edit_transaction_path(@transaction) %>
 <%= link_to "delete transaction", transaction_path(@transaction), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%>

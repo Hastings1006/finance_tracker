@@ -3,7 +3,7 @@
   <%= f.input :amount, as: :integer %>
   <%= f.input :transaction_type, collection: ['expense', 'income'], label: 'Select option' %>
   <%= f.input :transaction_date, as: :date %>
-  <%= f.input :category_ids, collection: Category.all, as: :check_boxes, label: 'Select categories' %>
+  <%= f.input :category_id, collection: Category.all, as: :check_boxes, label: 'Select categories' %>
   <%# <%= f.input :categories, collection: Category.all, multiple: true, label: 'Select categories' %> %>
   <%= f.input :account_id, collection: Account.all.map { |account| [account.name, account.id] }, label: 'Select option'%>
 

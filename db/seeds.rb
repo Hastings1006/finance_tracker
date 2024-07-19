@@ -8,7 +8,7 @@ end
 
 
 puts "Cleaning database..."
-TransactionCategory.destroy_all
+
 Transaction.destroy_all
 Account.destroy_all
 Category.destroy_all
@@ -35,25 +35,13 @@ puts "Finished creating accounts"
 
 puts "---------------------------------"
 
-# puts "Creating categories..."
-# category_names = ["Groceries", "Rent", "Utilities", "Transportation", "Entertainment", "Health", "Insurance"]
-# categories = {}
 
-# category_names.each do |name|
-#   categories[name] = Category.create(name: name)
-# end
-
-# puts "Finished creating categories"
-
-puts "---------------------------------"
 
 puts "Creating categories..."
 
 category_names = ["Salary", "Groceries", "Rent", "Utilities", "Transportation", "Entertainment", "Health", "Insurance", "Clothing", "Education", "Gifts", "Investments", "Savings", "Taxes", "Travel", "Other"]
-categories = {}
-
-category_names.each do |name|
-  categories[name] = Category.create!(name: name)
+categories = category_names.map do |name|
+  Category.create(name: name)
 end
 
 puts "Finished creating categories"
@@ -62,20 +50,19 @@ puts "---------------------------------"
 
 puts "Creating transactions..."
 
-
 accounts = Account.all
-
 transaction_types = ["income", "expense"]
 
 20.times do
   accounts.each do |account|
     transaction_types.each do |transaction_type|
-      # Create the transaction
+
       Transaction.create(
         amount: rand(100..500),
         transaction_type: transaction_type,
         account: account,
         transaction_date: random_date_within_last_year,
+        category: categories.sample
       )
     end
   end
@@ -84,16 +71,6 @@ end
 puts "Finished creating transactions"
 
 puts "---------------------------------"
-
-puts "Creating transaction categories..."
-
-Transaction.all.each do |transaction|
-  random_category = Category.order('RANDOM()').first
-  TransactionCategory.create(
-    transaction_record: transaction,
-    category: random_category
-    )
-end
 
 
 puts "Finished seeding the database!"
