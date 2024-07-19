@@ -7,11 +7,11 @@ class BudgetsController < ApplicationController
   def show
     if @budget
       # Calculate incomes (deposits)
-      incomes = @budget.accounts.joins(:transactions).where(transactions: { transaction_type: 'deposit' })
+      incomes = @budget.accounts.joins(:transactions).where(transactions: { transaction_type: 'income' })
       @avg_income = calculate_average(incomes.pluck(:amount)) || 0
 
       # Calculate expenses (withdrawals)
-      expenses = @budget.accounts.joins(:transactions).where(transactions: { transaction_type: 'withdrawal' })
+      expenses = @budget.accounts.joins(:transactions).where(transactions: { transaction_type: 'expense' })
       @avg_expense = calculate_average(expenses.pluck(:amount)) || 0
 
       # Calculate net income and goal

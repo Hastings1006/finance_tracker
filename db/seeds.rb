@@ -12,6 +12,7 @@ TransactionCategory.destroy_all
 Transaction.destroy_all
 Account.destroy_all
 Category.destroy_all
+Budget.destroy_all
 User.destroy_all
 
 puts "Cleaned the DB!"
@@ -64,7 +65,7 @@ puts "Creating transactions..."
 
 accounts = Account.all
 
-transaction_types = ["deposit", "withdrawal"]
+transaction_types = ["income", "expense"]
 
 20.times do
   accounts.each do |account|
