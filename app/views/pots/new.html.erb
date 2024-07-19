@@ -1,2 +1,8 @@
 <h1>Pots#new</h1>
 <p>Find me in app/views/pots/new.html.erb</p>
+<%= simple_form_for @pot do |f| %>
+  <%= f.input :name%>
+  <%= f.input :goal, as: :integer %>
+  <%= f.input :amount, as: :integer  %>
+  <%= f.button :submit %>
+<% end %>
