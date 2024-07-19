@@ -1,2 +1,6 @@
 <h1>Pots#show</h1>
 <p>Find me in app/views/pots/show.html.erb</p>
+<h2><%=@pot.name%></h2>
+<p><%=@pot.goal%>: <%=@pot.amount%></p>
+<%= link_to 'edit', edit_pot_path%>
+<%= link_to 'delete', pot_path(@pot),data: { turbo_method: :delete, turbo_confirm: 'Are your sure?' } %>

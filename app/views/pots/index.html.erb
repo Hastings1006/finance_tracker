@@ -1,6 +1,7 @@
 <h1>Pots#index</h1>
 <p>Find me in app/views/pots/index.html.erb</p>
 <% @pots.each do |pot|%>
-  <h4><%=pot.name%></h4>
+  <h4><%=link_to pot.name, pot_path(pot)%></h4>
   <p><%=pot.goal%>: <%=pot.amount%></p>
 <%end%>
+<%= link_to 'add', new_pot_path %>

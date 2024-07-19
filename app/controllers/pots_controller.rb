@@ -16,7 +16,7 @@ class PotsController < ApplicationController
   def create
     @pot = current_user.pots.build(pot_params)
     if @pot.save
-      redirect_to pots_path, notice: 'Pot was successfully created.'
+      redirect_to pot_path(@pot), notice: 'Pot was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class PotsController < ApplicationController
 
   def update
     if @pot.update(pot_params)
-      redirect_to pots_path, notice: 'Pot was successfully updated.'
+      redirect_to pot_path, notice: 'Pot was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
