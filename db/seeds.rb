@@ -49,7 +49,7 @@ puts "---------------------------------"
 
 puts "Creating categories..."
 
-category_names = ["Groceries", "Rent", "Utilities", "Transportation", "Entertainment", "Health", "Insurance"]
+category_names = ["Salary", "Groceries", "Rent", "Utilities", "Transportation", "Entertainment", "Health", "Insurance", "Clothing", "Education", "Gifts", "Investments", "Savings", "Taxes", "Travel", "Other"]
 categories = {}
 
 category_names.each do |name|
