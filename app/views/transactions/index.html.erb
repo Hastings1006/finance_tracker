@@ -1,9 +1,10 @@
 <h1>Transactions</h1>
+<%= link_to 'add', new_transaction_path %>
 <ul>
   <% @transactions.each do |transaction| %>
     <li>
       <%= link_to transaction.transaction_type, transaction_path(transaction) %>: <%= transaction.amount %>
-      
+      <%# <%= transaction.transaction_record.category.name %>
     </li>
   <% end %>
 </ul>

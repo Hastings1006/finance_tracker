@@ -1,7 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transactions, only: [:index, :edit, :update, :destroy]
-  # before_action :set_account, only: [:show, :create]
-  # before_action :set_categories, only: [:index]
+  before_action :load_categories, only: [:new, :edit]
   before_action :authenticate_user!
   def index
 
@@ -60,8 +59,8 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.joins(account: :user).where(users: { id: current_user.id})
   end
 
-  def set_categories
-    @categories = @transaction.categories
+  def load_categories
+    @categories = Category.all
   end
 
   def transaction_params
