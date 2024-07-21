@@ -1,9 +1,20 @@
 class TransactionsController < ApplicationController
   before_action :set_transactions, only: [:index, :edit, :update, :destroy]
-  before_action :load_categories, only: [:new, :edit]
+  before_action :load_categories, only: [:index, :new, :edit]
   before_action :authenticate_user!
   def index
+    @transactions = Transaction.includes(:category)
 
+    if params[:query].present?
+      @transactions = @transactions.where("amount LIKE :query OR transaction_type LIKE :query OR transaction_date LIKE :query", query: "%#{params[:query]}%")
+    end
+
+    @transactions_by_category = @transactions.group_by(&:category)
+
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'transactions_list', locals: { transactions_by_category: @transactions_by_category } }
+    end
   end
 
   def show
