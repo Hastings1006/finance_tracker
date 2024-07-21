@@ -11,10 +11,7 @@ class TransactionsController < ApplicationController
 
     @transactions_by_category = @transactions.group_by(&:category)
 
-    respond_to do |format|
-      format.html
-      format.js { render partial: 'transactions_list', locals: { transactions_by_category: @transactions_by_category } }
-    end
+    # render partial: 'list', locals: { transactions_by_category: @transactions_by_category }
   end
 
   def show

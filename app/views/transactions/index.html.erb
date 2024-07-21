@@ -8,7 +8,16 @@
                      data: { refresh_list_target: 'searchInput' } %>
   <% end %>
   <div data-refresh-list-target='list'>
-    <%= render partial: 'transactions_list', locals: { transactions_by_category: @transactions_by_category } %>
+    <%# <%= render partial: 'list', locals: { transactions_by_category: @transactions_by_category } %> %>
+    <% @transactions_by_category.each do |category, transactions| %>
+      <h2><%= category.name %></h2>
+          <% transactions.each do |transaction| %>
+
+              <h3><%= transaction.transaction_type%></h3>
+              <p><%= number_to_currency(transaction.amount) %></p>
+              <p><%= transaction.transaction_date%></p>
+          <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -16,12 +25,3 @@
 </div>
 
 <%= link_to 'add', new_transaction_path %>
-<% @transactions_by_category.each do |category, transactions| %>
-  <h2><%= category.name %></h2>
-      <% transactions.each do |transaction| %>
-
-          <h3><%= transaction.transaction_type%></h3>
-          <p><%= number_to_currency(transaction.amount) %></p>
-          <p><%= transaction.transaction_date%></p>
-      <% end %>
-<% end %>
